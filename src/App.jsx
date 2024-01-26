@@ -153,7 +153,7 @@ function App() {
           <div className="selection">
             <div className="table-2">
               <div>
-                <h2>Break length</h2>
+                <h2 className="label">Break length</h2>
                 <div className="table-3">
                   <button onClick={decBreak} className="mc-button">
                     -
@@ -165,7 +165,7 @@ function App() {
                 </div>
               </div>
               <div>
-                <h2>Time length</h2>
+                <h2 className="label">Time length</h2>
                 <div className="table-3">
                   <button
                     id="dec-work-btn"
