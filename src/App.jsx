@@ -16,9 +16,10 @@ function App() {
   const [breakTime, setBreakTime] = useState(5);
   const [workTime, setWorkTime] = useState(25);
 
-  // control to know if the timer is currently running and to play relaxing mc music
+  // control to know if the timer is currently running, set music volume and to play relaxing mc music
   const [isRunning, setIsRunning] = useState(false);
   const [reload, setReload] = useState(true);
+  const [playing, setPlaying] = useState(true);
 
   // states to know the current time. Mins and seconds
   const [timeSec, setTimeSec] = useState(0);
@@ -45,17 +46,14 @@ function App() {
   const music = new Howl({
     src: [musicSound],
     html5: true,
-    volume: 0.2,
+    volume: 0.3,
     loop: true,
+    mute: false,
   });
 
   // use effect to set a counter
   useEffect(() => {
     if (isRunning) {
-      if (reload) {
-        music.play();
-        setReload(false);
-      }
       clock.play();
       const intervalId = setInterval(() => {
         if (timeSec > 0) {
@@ -124,6 +122,10 @@ function App() {
 
   const play = () => {
     disen(false);
+    if (reload) {
+      music.play();
+      setReload(false);
+    }
     select.play();
     setIsRunning(true);
   };
@@ -135,11 +137,9 @@ function App() {
 
   const reset = () => {
     select.play();
-    music.pause();
     setIsRunning(false);
     setTimeMin(workTime);
     setTimeSec(0);
-    setReload(true);
     disen(true);
   };
 
